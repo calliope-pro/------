@@ -21,7 +21,7 @@ export default function Home() {
       <Box pos='relative'>
         <Box
           color='white'
-          fontSize='5xl'
+          fontSize={{ base: '3xl', md: '5xl' }}
           pos='absolute'
           transform='translate(-50%,-50%)'
           top='20%'
@@ -31,7 +31,7 @@ export default function Home() {
         </Box>
         <Text
           color='white'
-          fontSize='2xl'
+          fontSize={{ base: 'xl', md: '2xl' }}
           pos='absolute'
           transform='translate(-50%,-50%)'
           top='45%'
@@ -41,7 +41,7 @@ export default function Home() {
         </Text>
         <Text
           color='white'
-          fontSize='2xl'
+          fontSize={{ base: 'xl', md: '2xl' }}
           pos='absolute'
           transform='translate(-50%,-50%)'
           top='65%'
@@ -66,10 +66,10 @@ export default function Home() {
             referrerPolicy='no-referrer-when-downgrade'
           />
         </GridItem>
-        <GridItem colSpan={3}>
+        <GridItem display='flex' alignItems='center' colSpan={3}>
           <Image src='/a.jpg' alt='' />
         </GridItem>
-        <GridItem colSpan={3}>
+        <GridItem display='flex' alignItems='center' colSpan={3}>
           <Image src='/b.jpg' alt='' />
         </GridItem>
         <GridItem colSpan={4}>
