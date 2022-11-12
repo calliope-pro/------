@@ -1,15 +1,40 @@
 import Head from 'next/head';
 import {
   Box,
+  CircularProgress,
   Container,
   Divider,
   GridItem,
   Image,
+  ListItem,
   SimpleGrid,
   Text,
+  UnorderedList,
 } from '@chakra-ui/react';
+import useSWR from 'swr';
+import axios from 'axios';
 
 export default function Home() {
+  const { data } = useSWR(
+    '/api/fetch',
+    async (url) =>
+      (await axios.get(url)).data as {
+        posts: {
+          title: string;
+          key: string;
+        }[];
+        dates: {
+          key: string;
+          date: string;
+        }[];
+      }
+  );
+  if (!data)
+    return (
+      <Box textAlign='center'>
+        <CircularProgress isIndeterminate size={80} />
+      </Box>
+    );
   return (
     <Box px={1} pb={5}>
       <Head>
@@ -85,8 +110,14 @@ export default function Home() {
 
       <Container>
         <Text fontSize='3xl' mt={4}>
-          お願い
+          お知らせ
         </Text>
+        <UnorderedList spacing={2}>
+          {data.posts.map(({ key, title }) => (
+            <ListItem key={key}>{title}</ListItem>
+          ))}
+        </UnorderedList>
+        <Text fontSize='3xl'>お願い</Text>
         <Text>
           お支払いは現金のみとさせていただきます。
           <Text fontSize='xl' as='span'>
@@ -99,7 +130,13 @@ export default function Home() {
           <Text as='span' fontSize='xl'>
             ・・・電話にてご確認ください。
           </Text>
+          現在の休業日予定
         </Text>
+        <UnorderedList spacing={2}>
+          {data.dates.map(({ key, date }) => (
+            <ListItem key={key}>{date}</ListItem>
+          ))}
+        </UnorderedList>
         <Text fontSize='2xl'>
           営業時間
           <Text as='span' fontSize='xl'>
