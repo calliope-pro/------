@@ -137,12 +137,6 @@ export default function Home() {
             <ListItem key={key}>{date}</ListItem>
           ))}
         </UnorderedList>
-        <Text fontSize='2xl'>
-          営業時間
-          <Text as='span' fontSize='xl'>
-            ・・・ 冬期11:00～18:00。
-          </Text>
-        </Text>
       </Container>
     </Box>
   );
